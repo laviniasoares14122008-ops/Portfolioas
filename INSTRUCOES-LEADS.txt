@@ -1,0 +1,9 @@
+INTEGRAÇÃO DE LEADS NO DASHBOARD
+
+1. No Supabase, abra SQL Editor e execute o arquivo supabase/permissoes-leads-dashboard.sql.
+2. Esse SQL pressupõe que public.admins já existe e contém o user_id da conta administradora usada no login do Dashboard. O código atual do Dashboard já valida essa tabela.
+3. A política pública de INSERT da tabela leads, criada anteriormente, deve permanecer ativa para receber formulários. Não crie políticas públicas de SELECT.
+4. Substitua os arquivos do projeto pelos arquivos desta pasta (ou publique o ZIP atualizado no Vercel). Foram atualizados dashboard.html, js/dashboard.js e css/style.css, além das cópias em public/.
+5. A seção Gerenciar Leads mostra os contatos, contagens, permite alterar status e excluir.
+
+IMPORTANTE: O formulário público do portfólio ainda precisa enviar os campos nome, email e mensagem para public.leads. A integração do painel apenas lê e administra os registros já enviados.

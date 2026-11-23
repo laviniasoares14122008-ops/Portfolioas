@@ -1,0 +1,56 @@
+PORTFÓLIO LAVINIA TECH — ENTREGA DE REVISÃO
+
+O QUE FOI ATUALIZADO
+- Refinamento de cores, tipografia, espaçamentos, cartões e estados de foco.
+- Layout responsivo para celular, tablet e desktop.
+- Seção Minha História revisada.
+- Cards de projetos com imagens, descrições e botão para abrir o site.
+- Portfólio principal mantém Carlos Chagas e Maika's House; Mesa do Vale foi retirado da vitrine e também é filtrado caso ainda exista como registro publicado no banco.
+- Dashboard com menu lateral, estatísticas e formulário para criar, editar e excluir projetos.
+- Upload de imagem no Supabase Storage.
+- Login via Supabase Auth e verificação de usuário administrador.
+- Regras de acesso no Supabase com Row Level Security (RLS).
+- Modelo de Landing Page reutilizável.
+- Documento STACK-TECNOLOGICA.md com comparação e decisão da stack.
+
+COMO ABRIR NO WINDOWS
+1. Extraia o ZIP.
+2. Abra a pasta portfolio_lavinia_tech no VS Code.
+3. Abra a pasta com Live Server (ou rode um servidor local).
+4. Abra index.html pelo servidor local, não diretamente pelo caminho file://.
+5. A página Projetos e o Dashboard dependem da conexão com Supabase.
+
+CONFIGURAR O SUPABASE
+1. Acesse o projeto indicado em js/supabase.js.
+2. Abra SQL Editor > New query.
+3. Copie e execute o conteúdo completo de supabase/schema.sql.
+4. Em Authentication > Users, crie a conta de login.
+5. Execute o INSERT indicado em supabase/CONFIGURACAO.md para autorizar o ID dessa conta na tabela public.admins.
+6. Em Authentication > URL Configuration, configure Site URL e Redirect URLs para a Vercel e para o endereço local usado no Live Server.
+7. Confirme que o bucket portfolio-projetos existe em Storage.
+
+ACESSAR O DASHBOARD
+1. Abra login.html pelo servidor local ou no domínio publicado.
+2. Informe o e-mail e a senha cadastrados no Supabase Auth.
+3. Apenas contas registradas em public.admins podem acessar o painel.
+4. No Dashboard, clique em Novo projeto para cadastrar título, descrição, categoria, imagem e link.
+5. Use Editar ou Excluir para gerenciar os registros.
+
+OBSERVAÇÕES IMPORTANTES
+- A chave no arquivo js/supabase.js é publishable e pode ser usada no navegador. Nunca coloque service_role/secret no front-end.
+- A segurança depende das políticas RLS executadas em supabase/schema.sql.
+- A conta precisa estar cadastrada em public.admins; criar um usuário no Auth não concede acesso administrativo.
+- A publicação no GitHub/Vercel e as alterações no projeto Supabase remoto não foram executadas nesta entrega, pois exigem autorização/acesso às respectivas contas.
+- A imagem do projeto Carlos Chagas é um arquivo local incluído. A imagem Maika's House é o SVG de identidade visual incluído na pasta.
+- O diretório projetos/mesa-do-vale permanece arquivado como material de outro trabalho, mas não aparece na vitrine deste portfólio.
+
+
+SEGURANCA DO DASHBOARD
+1. Atualize os arquivos do site com esta versao.
+2. No Supabase, execute supabase/seguranca-dashboard.sql.
+3. Abra login.html e entre novamente com e-mail e senha.
+4. Teste abrir dashboard.html diretamente em uma nova aba: deve voltar ao login.
+5. Teste cadastro, edicao e exclusao usando a conta administradora.
+
+Nota: o RLS protege os dados no Supabase. Como o site atual e estatico, impedir a entrega do proprio HTML exige migracao para Next.js com verificacao no servidor.
+\n\nMIGRAÇÃO NEXT.JS\nConsulte README-NEXTJS.md para instalar, configurar as variáveis do Supabase e executar com npm run dev. A partir desta versão, use o servidor Next.js (localhost:3000), não Live Server.\n

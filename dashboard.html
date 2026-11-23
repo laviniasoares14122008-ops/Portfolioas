@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow"><meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0"><meta name="theme-color" content="#080b12">
+  <meta name="description" content="Área administrativa protegida do portfólio Lavinia Oliveira Soares.">
+  <title>Dashboard | Lavinia Oliveira Soares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js" defer></script><script src="js/dashboard.js" defer></script>
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <aside class="admin-sidebar" aria-label="Menu administrativo">
+      <a class="brand" href="index.html"><span class="brace">{</span>LO<span class="brace">}</span><small>ADMIN</small></a>
+      <div class="admin-profile"><span class="admin-avatar">LO</span><div><strong>Lavinia</strong><small>Administradora</small></div></div>
+      <p class="admin-nav-label">GERENCIAMENTO</p>
+      <a class="admin-nav-link active" href="#overview"><span>▦</span> Visão geral</a>
+      <a class="admin-nav-link" href="#projects"><span>▤</span> Projetos</a>
+      <a class="admin-nav-link" href="#leads"><span>✉</span> Leads</a>
+      <a class="admin-nav-link" href="portfolio.html"><span>↗</span> Ver portfólio</a>
+      <div class="admin-sidebar-bottom"><span class="connection-dot"></span><span id="dashboard-db-status">Verificando conexão…</span></div>
+    </aside>
+
+    <section class="admin-main">
+      <header class="admin-topbar"><div><p class="mono accent">// ESPAÇO DE TRABALHO</p><h1>Dashboard</h1></div><button class="button secondary admin-logout" id="logout-button" type="button">Sair <span>↗</span></button></header>
+      <div id="admin-loading" class="admin-notice" role="status">Área restrita. Validando autenticação e permissão de administradora…</div>
+      <section id="admin-content" hidden>
+        <section id="overview" class="admin-section">
+          <div class="admin-welcome"><div><p class="mono accent">BEM-VINDA DE VOLTA</p><h2>Seu trabalho, em um só lugar.</h2><p>Gerencie os projetos que aparecem no portfólio público.</p></div><a class="button primary" href="portfolio.html" target="_blank" rel="noopener">Visualizar site ↗</a></div>
+          <div class="admin-stats">
+            <article class="admin-stat"><span>PROJETOS CADASTRADOS</span><strong id="stat-total">—</strong><small>Total no Supabase</small></article>
+            <article class="admin-stat"><span>PUBLICADOS</span><strong id="stat-published">—</strong><small>Visíveis no portfólio</small></article>
+            <article class="admin-stat"><span>RASCUNHOS</span><strong id="stat-drafts">—</strong><small>Ainda não publicados</small></article>
+          </div>
+        </section>
+
+        <section id="projects" class="admin-section admin-projects-section">
+          <div class="admin-section-heading"><div><p class="mono accent">// CONTEÚDO</p><h2>Gerenciar projetos</h2><p>Adicione, atualize ou remova os projetos do seu portfólio.</p></div><button class="button primary" id="new-project-button" type="button">+ Novo projeto</button></div>
+          <div class="admin-panel" id="project-form-panel" hidden>
+            <div class="admin-panel-heading"><div><p class="mono accent">// EDITOR DE PROJETO</p><h3 id="form-title">Adicionar projeto</h3></div><button class="icon-button" id="cancel-form-button" type="button" aria-label="Fechar formulário">×</button></div>
+            <form id="project-form" class="project-form">
+              <input type="hidden" id="project-id">
+              <label for="project-title">Título do projeto *</label><input id="project-title" name="titulo" required maxlength="120" placeholder="Ex.: Meu projeto web">
+              <div class="form-two-cols"><div><label for="project-slug">Slug</label><input id="project-slug" name="slug" maxlength="140" placeholder="meu-projeto"></div><div><label for="project-category">Categoria</label><input id="project-category" name="categoria" maxlength="80" placeholder="Desenvolvimento Web"></div></div>
+              <label for="project-description">Descrição *</label><textarea id="project-description" name="descricao" rows="4" required maxlength="800" placeholder="Conte o objetivo e as funcionalidades do projeto."></textarea>
+              <div class="form-two-cols"><div><label for="project-city">Cidade (opcional)</label><input id="project-city" name="cidade" maxlength="100" placeholder="Carlos Chagas, MG"></div><div><label for="project-status">Status</label><select id="project-status" name="status"><option value="publicado">Publicado</option><option value="rascunho">Rascunho</option></select></div></div>
+              <label for="project-image">Imagem do projeto (arquivo)</label><input id="project-image" name="imagem" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+              <p class="field-help">A imagem será enviada para o Storage do Supabase. Limite recomendado: 5 MB.</p>
+              <label for="project-image-url">Ou endereço de uma imagem</label><input id="project-image-url" name="imagem_url" type="url" placeholder="https://...">
+              <label for="project-link">Link do projeto</label><input id="project-link" name="link_url" type="url" placeholder="https://seu-projeto.vercel.app">
+              <div class="admin-form-actions"><button class="button primary" type="submit" id="save-project-button">Salvar projeto</button><button class="button secondary" type="button" id="cancel-form-button-2">Cancelar</button></div>
+              <p id="project-form-message" class="form-message" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+          <div class="admin-panel"><div class="admin-list-heading"><h3>Seus projetos</h3><span id="project-list-count">0 itens</span></div><div id="admin-project-list" class="admin-project-list"><p class="admin-empty">Carregando projetos…</p></div></div>
+        </section>
+
+        <section id="leads" class="admin-section">
+          <div class="admin-section-heading"><div><p class="mono accent">// CONTATOS</p><h2>Gerenciar leads</h2><p>Mensagens enviadas pelo formulário de contato do portfólio.</p></div><button class="button secondary" id="refresh-leads-button" type="button">↻ Atualizar</button></div>
+          <div class="admin-stats leads-stats">
+            <article class="admin-stat"><span>TOTAL DE LEADS</span><strong id="leads-stat-total">—</strong><small>Contatos recebidos</small></article>
+            <article class="admin-stat"><span>NOVOS</span><strong id="leads-stat-new">—</strong><small>Aguardando atendimento</small></article>
+            <article class="admin-stat"><span>EM ANDAMENTO</span><strong id="leads-stat-progress">—</strong><small>Em atendimento</small></article>
+            <article class="admin-stat"><span>RESPONDIDOS</span><strong id="leads-stat-done">—</strong><small>Atendimento concluído</small></article>
+          </div>
+          <div class="admin-panel"><div class="admin-list-heading"><h3>Contatos recebidos</h3><span id="lead-list-count">0 itens</span></div><div id="admin-lead-list" class="admin-lead-list"><p class="admin-empty">Carregando contatos…</p></div><p id="leads-message" class="form-message" role="status" aria-live="polite"></p></div>
+        </section>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

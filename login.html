@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#080b12">
+<meta name="description" content="Acesso administrativo ao portfólio de Lavinia Oliveira Soares."><title>Entrar | Portfólio Lavinia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase.js" defer></script><script src="js/login.js" defer></script>
+</head><body>
+<header class="topbar"><nav class="nav wrap" aria-label="Navegação principal"><a class="brand" href="index.html"><span class="brace">{</span>LO<span class="brace">}</span><small>DEV PORTFOLIO</small></a><a class="nav-cta" href="index.html">Voltar ao site ↗</a></nav></header>
+<main><section class="login-shell"><div class="login-box"><p class="mono accent">// ÁREA ADMINISTRATIVA</p><div class="login-mark" aria-hidden="true">{LO}</div><h1>Acesso <span>restrito.</span></h1><p class="dim">Entre com o e-mail e a senha cadastrados no Supabase Auth.</p>
+<form id="admin-login-form" novalidate><label for="email">E-mail</label><input id="email" name="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="username" required><label for="password">Senha</label><input id="password" name="password" type="password" placeholder="Digite sua senha" autocomplete="current-password" required><button class="button primary" type="submit" id="login-submit">Entrar no Dashboard ↗</button><p id="login-error" class="form-message" role="alert" aria-live="polite"></p></form>
+<small>Somente contas autorizadas como administradoras podem acessar o painel. Se ainda não possui uma conta, crie o usuário no painel do Supabase e siga o arquivo <code>supabase/CONFIGURACAO.md</code>.</small></div></section></main>
+<footer class="footer wrap"><a class="brand" href="index.html"><span class="brace">{</span>LO<span class="brace">}</span><small>DEV PORTFOLIO</small></a><p>© <span data-year></span> Lavinia Oliveira Soares</p><a href="portfolio.html">Ver projetos ↗</a></footer>
+<script>document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());</script>
+</body></html>
